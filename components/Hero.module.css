@@ -1,52 +1,61 @@
-.heroContainer {
+.heroSection {
   height: 100vh;
   width: 100%;
-  background-color: #f0f0f0; /* Light background like video */
-  padding: 50px;
+  background: #1a1a1a;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   position: relative;
 }
 
-.statsWrapper {
-  display: flex;
-  gap: 20px;
+.title {
+  color: white;
+  font-size: 4rem;
+  font-family: sans-serif;
+  z-index: 1;
 }
 
-.statBox {
-  padding: 25px;
-  width: 280px;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+.carContainer {
+  position: absolute;
+  bottom: 15%;
+  left: -200px; /* Start screen ke bahar se */
+  width: 300px;
 }
 
-.middleSection {
-  position: relative;
+.carImage {
   width: 100%;
-  height: 200px;
-  display: flex;
-  align-items: center;
+  height: auto;
 }
 
-.headline {
-  font-size: 8rem;
-  font-weight: 900;
-  color: #111;
+.road {
   position: absolute;
-  left: 0;
-  z-index: 1; /* Text niche rahega */
-  display: flex;
-  gap: 5px;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  background: #333;
+  border-top: 5px dashed #ffcc00;
 }
 
-.visualElement {
-  width: 450px;
-  height: 220px;
-  /* background: url('/car-top.png') center/contain no-repeat; */
-  position: absolute;
-  left: -200px; /* Car letters ke closer shuru hogi, not way back */
-  z-index: 2; /* Car text ke side se niklegi */
-  border-radius: 20px;
+/* --- Responsive Settings --- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .title { font-size: 3rem; }
+  .carContainer { width: 250px; }
+}
+
+/* Mobile Phones */
+@media (max-width: 768px) {
+  .title { 
+    font-size: 2rem; 
+    text-align: center;
+    padding: 20px;
+  }
+  .carContainer { 
+    width: 180px; /* Mobile par car choti kar di */
+    bottom: 20%; 
+  }
+  .road { height: 25%; }
 }

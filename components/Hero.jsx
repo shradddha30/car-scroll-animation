@@ -1,54 +1,45 @@
 "use client";
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import styles from './Hero.module.css';
-import { initAnimations } from './animations';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import styles from "./Hero.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
-  const container = useRef();
-  const text = "WELCOMEITZFIZZ";
+  const carRef = useRef(null);
+  const sectionRef = useRef(null);
 
-  useGSAP(() => {
-    initAnimations(container);
-  }, { scope: container });
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Mobile check: screen width 768px se kam hai ya nahi
+      const isMobile = window.innerWidth < 768;
+
+      gsap.to(carRef.current, {
+        x: isMobile ? "80vw" : "100vw", // Mobile par thoda kam move karega
+        rotation: 2, // Thoda sa bounce effect
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1, // Smooth scrolling
+          pin: true,
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section ref={container} className={styles.heroContainer}>
-      {/* Top Stats */}
-      <div className={styles.statsWrapper}>
-        <div className={`${styles.statBox} statBox bg-[#d4ff3f] text-black`}>
-          <h2 className="text-4xl font-bold">58%</h2>
-          <p className="text-sm">Increase in pick up point use</p>
-        </div>
-        <div className={`${styles.statBox} statBox bg-[#222] text-white`}>
-          <h2 className="text-4xl font-bold">27%</h2>
-          <p className="text-sm">Faster response time</p>
-        </div>
+    <section ref={sectionRef} className={styles.heroSection}>
+      <h1 className={styles.title}>Scroll to Drive</h1>
+      <div ref={carRef} className={styles.carContainer}>
+        {/* Make sure car.png is in your public folder */}
+        <img src="/car.png" alt="Animated Car" className={styles.carImage} />
       </div>
-
-      {/* Middle Section: Car & Text */}
-      <div className={styles.middleSection}>
-        <h1 className={styles.headline}>
-          {text.split("").map((char, index) => (
-            <span key={index} className="letter inline-block">{char}</span>
-          ))}
-        </h1>
-        
-        {/* Car Image - z-index is higher than text */}
-        <div className={`${styles.visualElement} visualElement`}>
-          <img 
-            src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=800&auto=format&fit=crop" 
-            alt="top view car"
-            className="w-full h-full object-cover rounded-xl"
-          />
-        </div>
-      </div>
-
-      {/* Bottom Stat */}
-      <div className={`${styles.statBox} statBox bg-[#ff8a5c] self-start`}>
-        <h2 className="text-4xl font-bold">40%</h2>
-        <p className="text-sm">Decreased in customer phone calls</p>
-      </div>
+      <div className={styles.road}></div>
     </section>
   );
 }
