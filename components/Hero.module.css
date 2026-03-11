@@ -1,0 +1,52 @@
+.heroContainer {
+  height: 100vh;
+  width: 100%;
+  background-color: #f0f0f0; /* Light background like video */
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.statsWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.statBox {
+  padding: 25px;
+  width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.middleSection {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.headline {
+  font-size: 8rem;
+  font-weight: 900;
+  color: #111;
+  position: absolute;
+  left: 0;
+  z-index: 1; /* Text niche rahega */
+  display: flex;
+  gap: 5px;
+}
+
+.visualElement {
+  width: 450px;
+  height: 220px;
+  /* background: url('/car-top.png') center/contain no-repeat; */
+  position: absolute;
+  left: -200px; /* Car letters ke closer shuru hogi, not way back */
+  z-index: 2; /* Car text ke side se niklegi */
+  border-radius: 20px;
+}
