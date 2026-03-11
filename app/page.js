@@ -1,12 +1,20 @@
-import Hero from "@/components/Hero";
+import Hero from '../components/Hero';
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-[#f0f0f0]">
+      {/* 1. Main Animation Section */}
       <Hero />
-      {/* Scroll karne ke liye extra space niche */}
-      <div style={{ height: "200vh", background: "#111", textAlign: "center", paddingTop: "50px" }}>
-        <h2 style={{ color: "#555" }}>Keep Scrolling for Stats...</h2>
+
+      {/* 2. Scroll Space: Iske bina scroll-linked animation trigger nahi hoga */}
+      <div style={{ 
+        height: '400vh', 
+        backgroundColor: '#f0f0f0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <h2 style={{ color: '#ccc', fontSize: '2rem' }}>Keep Scrolling for Stats...</h2>
       </div>
     </main>
   );
